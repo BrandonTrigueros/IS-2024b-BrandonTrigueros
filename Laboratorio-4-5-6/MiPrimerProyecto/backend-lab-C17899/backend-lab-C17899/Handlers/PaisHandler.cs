@@ -11,16 +11,13 @@ namespace backend_lab_C17899.Handlers
         public PaisesHandler()
         {
             var builder = WebApplication.CreateBuilder();
-            _rutaConexion =
-            builder.Configuration.GetConnectionString("PaisesContext");
+            _rutaConexion = builder.Configuration.GetConnectionString("PaisesContext");
             _conexion = new SqlConnection(_rutaConexion);
         }
         private DataTable CrearTablaConsulta(string consulta)
         {
-            SqlCommand comandoParaConsulta = new
-            SqlCommand(consulta, _conexion);
-            SqlDataAdapter adaptadorParaTabla = new
-            SqlDataAdapter(comandoParaConsulta);
+            SqlCommand comandoParaConsulta = new SqlCommand(consulta, _conexion);
+            SqlDataAdapter adaptadorParaTabla = new SqlDataAdapter(comandoParaConsulta);
             DataTable consultaFormatoTabla = new DataTable();
             _conexion.Open();
             adaptadorParaTabla.Fill(consultaFormatoTabla);
@@ -31,8 +28,7 @@ namespace backend_lab_C17899.Handlers
         {
             List<PaisModel> paises = new List<PaisModel>();
             string consulta = "SELECT * FROM dbo.Pais ";
-            DataTable tablaResultado =
-            CrearTablaConsulta(consulta);
+            DataTable tablaResultado = CrearTablaConsulta(consulta);
             foreach (DataRow columna in tablaResultado.Rows)
             {
                 paises.Add(
@@ -41,8 +37,7 @@ namespace backend_lab_C17899.Handlers
                     Id = Convert.ToInt32(columna["Id"]),
                     Nombre = Convert.ToString(columna["Nombre"]),
                     Idioma = Convert.ToString(columna["Idioma"]),
-                    Continente =
-                Convert.ToString(columna["Continente"]),
+                    Continente =Convert.ToString(columna["Continente"]),
                 });
             }
             return paises;
