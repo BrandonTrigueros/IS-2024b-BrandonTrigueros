@@ -36,7 +36,7 @@ namespace backend_lab_C17899.Controllers
                 var resultado = paisesHandler.CrearPais(pais);
                 return new JsonResult(resultado);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, 
                     "Error creando país");
