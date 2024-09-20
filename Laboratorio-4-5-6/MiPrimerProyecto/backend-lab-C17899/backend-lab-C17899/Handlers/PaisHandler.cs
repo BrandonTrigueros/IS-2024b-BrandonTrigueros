@@ -37,10 +37,27 @@ namespace backend_lab_C17899.Handlers
                     Id = Convert.ToInt32(columna["Id"]),
                     Nombre = Convert.ToString(columna["Nombre"]),
                     Idioma = Convert.ToString(columna["Idioma"]),
-                    Continente =Convert.ToString(columna["Continente"]),
+                    Continente = Convert.ToString(columna["Continente"]),
                 });
             }
             return paises;
+        }
+        public bool CrearPais(PaisModel pais)
+        {
+            var consulta = @"INSERT INTO [dbo].[Pais]([Nombre],[Idioma] ,[Continente])
+                            VALUES(@Nombre,@Idioma, @Continente) ";
+
+            var comandoParaConsulta = new SqlCommand(consulta, _conexion);
+
+            comandoParaConsulta.Parameters.AddWithValue("@Nombre", pais.Nombre);
+            comandoParaConsulta.Parameters.AddWithValue("@Idioma", pais.Idioma);
+            comandoParaConsulta.Parameters.AddWithValue("@Continente",pais.Continente);
+
+            _conexion.Open();
+            bool exito = comandoParaConsulta.ExecuteNonQuery() >= 1; 
+            _conexion.Close();
+
+            return exito;
         }
     }
 }
