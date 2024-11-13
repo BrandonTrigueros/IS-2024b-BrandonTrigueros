@@ -58,7 +58,7 @@ export default {
       this.paises.splice(index, 1);
     },
     obtenerTareas() {
-      axios.get("http://localhost:5252/api/Paises")
+      axios.get("https://localhost:7261/api/Paises")
         .then((response) => { this.paises = response.data; });
     }
   },
